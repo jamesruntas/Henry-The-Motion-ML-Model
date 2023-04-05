@@ -1,0 +1,20 @@
+import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve, auc
+
+# predict probabilities for test set
+y_pred = model.predict(X_test)
+
+# compute false positive rate and true positive rate at different thresholds
+fpr, tpr, thresholds = roc_curve(y_test, y_pred)
+
+# compute area under the ROC curve
+roc_auc = auc(fpr, tpr)
+
+# plot ROC curve
+plt.plot(fpr, tpr, label='ROC curve (area = %0.2f)' % roc_auc)
+plt.plot([0, 1], [0, 1], 'k--')  # diagonal line
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver operating characteristic (ROC) curve')
+plt.legend(loc='lower right')
+plt.show()
